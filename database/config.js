@@ -8,19 +8,17 @@ const mongoose = require('mongoose');
 
     try {
     //cadena de conexion a base de datos
-        await mongoose.connect(process.env.DB_CNN,{
-            useNewUrlParser:true,
-            useUnifiedTopology:true,         
+        await mongoose.connect(process.env.DB_CNN,{  
+                  
+     
         });
+      
         console.log('Base de datos online');
 
     }catch(error){
         console.log(error);
         throw new Error('Error a la hora de iniciar la base de datos');
     }
-
-
-
 }
 
 module.exports = {
