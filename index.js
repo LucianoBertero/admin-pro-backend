@@ -21,12 +21,16 @@ app.use(express.json())
 dbconection()
 
 
-console.log(process.env)
 
 //primer argumento es la ruta, y el segundo es el archivo que se va a ejecutar
 app.use('/api/usuarios',require('./routes/usuarios'))//rutas para hacer el manejo de los usuarios 
-
 app.use( '/api/login', require('./routes/auth') );
+app.use( '/api/hospitales', require('./routes/hospitales') );
+app.use( '/api/medicos', require('./routes/medicos') );
+app.use( '/api/todo', require('./routes/busquedas') );
+app.use( '/api/uploads', require('./routes/uploads') );
+
+
 
 
 

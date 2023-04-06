@@ -9,11 +9,33 @@ const {validationResult}=require('express-validator')
 
 const getUsuarios=async (req,res)=>{
 
-    const usuario=  await Usuario.find({},'nombre email role google')   
+    const desde=Number (req.query.desde || 0); //si no viene nada en el query desde, se pone 0 por defecto
+
+ 
+    // const usuario=  await Usuario
+    //                 .find({},'nombre email role google')
+    //                 .skip(desde) //traiga a partir de cierto numero de registros
+    //                 .limit(5);   //traiga solo 5 registros
+
+    // const total= await Usuario.count(); //cuenta la cantidad de registros que hay en la base de datos
+
+
+    const [usuarios, total]=await Promise.all([ //esto lo hacemos para que las peticiones asincronas se hagan de manera simultanea
+            Usuario
+                    .find({},'nombre email role google img')
+                    .skip(desde) //traiga a partir de cierto numero de registros
+                    .limit(5),   //traiga solo 5 registros
+                    
+            Usuario.countDocuments()
+    ])
+
+
+
     res.json({
         ok:true,
-        usuario,
-        uid:req.uid   
+        usuarios,
+        uid:req.uid ,
+        total:total  
     })
 }
 
