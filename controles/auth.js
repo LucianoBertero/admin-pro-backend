@@ -85,13 +85,7 @@ const googleSingIn = async(req,res=response)=>{
             usuario.google=true
         }
 
-        console.log('-------')
-        console.log({usuario})
-        console.log('-------')
-        
-        console.log('------- usuarioDB')
-        console.log({usuarioDB})
-        console.log('-------')
+
         //guardar Usuario
         await usuario.save()
         .then(savedData => {
@@ -103,8 +97,6 @@ const googleSingIn = async(req,res=response)=>{
 
         //generar token
         const token =await generarJWT(usuario.id) //generar el token para saber si la persona esta logueada y podes usar de la app
-
-
 
         res.status(500).json({
             ok:true,
@@ -123,6 +115,20 @@ const googleSingIn = async(req,res=response)=>{
     }
 }
 
+const renewToken=async (req,res=response)=>{
+
+    const uid=req.uid
+    const token = await generarJWT(uid)
+
+
+    res.json({
+        ok:true,
+        uid,
+
+        token
+    })
+}
+
 
 
 
@@ -130,5 +136,6 @@ const googleSingIn = async(req,res=response)=>{
 
 module.exports={
     login,
-    googleSingIn
+    googleSingIn,
+    renewToken
 }

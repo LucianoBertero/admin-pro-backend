@@ -15,8 +15,6 @@ const {
 }
 =require('../controles/medicos') //validadores
 
-
-
 const router=Router();
 
 //obtener
@@ -35,18 +33,22 @@ router.post(
     ) //campo uno es la ruta, segundo son los middlewares, tercero es el controlador, middlewares lo tengo con npm i express-validator
 
 
-
-
 router.put( '/:id',
     [   
-            
+        validarJWt,
+        check('nombre', 'el nombre es requerido').not().isEmpty(),
+        check('hospital',"el id del hospital es requerido").isMongoId(),
+        validarCampos
     ],
-    actualizarMedicos
+        actualizarMedicos   
 );
 
 
 
-router.delete( '/:id',borrarMedicos)
+router.delete( '/:id',[
+    validarJWt
+
+],borrarMedicos)
 
 
 

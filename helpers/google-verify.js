@@ -9,7 +9,7 @@ const client = new OAuth2Client(process.env.GOOGLE_SECRET);
 
 
 const googleVerify= async(token)=> {
-  console.log('ENTROOO AL GOOGLE')
+
   
   const ticket = await client.verifyIdToken({
       idToken: token,

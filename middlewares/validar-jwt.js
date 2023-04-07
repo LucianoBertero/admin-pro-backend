@@ -18,7 +18,7 @@ const  validarJWt= (req, res, next) => {
     }
     try{
         const {uid}=jwt.verify(token,process.env.JWT_SECRET); //verifica el token, y si es valido, devuelve el uid, si esto funcion con la semilla tiene que seguir sino se va al catch
-        req.uid=uid       
+        req.uid=uid  // le asignamos como parametro a la request el uid 
         next()
     }
     catch(err){
