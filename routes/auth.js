@@ -3,7 +3,7 @@
 
 */
 const {Router}=require('express')
-const {login}=require('../controles/auth');
+const {login,googleSingIn}=require('../controles/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
 const {check}=require('express-validator') //validadores
 
@@ -18,6 +18,16 @@ router.post('/',
         validarCampos//metodo generico
     ],
     login
+)
+
+
+
+router.post('/google',
+    [     
+        check('token','el token de Google es obligatorio').not().isEmpty()
+        //metodo generico
+    ],
+    googleSingIn
 )
 
 

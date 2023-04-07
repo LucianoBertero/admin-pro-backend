@@ -86,16 +86,12 @@ const retornaImgen=(req,res=response)=>{ //para este metodo tenemos que utilizar
 
     console.log(pathImg)
 
-    if(fs.existsSync(pathImg)){
+    if(fs.existsSync(pathImg)){//si exsite el path, esto lo comprobamos con el file sistem, devolvemos la imagen correcta
         res.sendFile(pathImg)
-    }else{
+    }else{// en el caso de que no exista se manda una imagen por defecto
         const pathImg=path.join(__dirname,`../uploads/No_Image_Available.jpg`)
         res.sendFile(pathImg)
-    }
-
-
-
-   
+    }   
 
 }
 
